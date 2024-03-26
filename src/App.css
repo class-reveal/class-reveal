@@ -34,6 +34,7 @@
 	margin: 0 auto;
 	text-align: center;
 	animation: fade 0.2s linear;
+	-webkit-animation: fade 0.2s linear;
 }
 
 .main-text {
@@ -47,6 +48,25 @@
 
 #signup-button {
 	view-transition-name: modal;
+	overflow: clip;
+	contain: paint;
+}
+
+::view-transition-old(modal),
+::view-transition-new(modal) {
+	animation: none;
+	height: 100%;
+	overflow: clip;
+	border-radius: 40px;
+}
+
+.modal-fields {
+	view-transition-name: modal-fields;
+}
+
+::view-transition-old(modal-fields),
+::view-transition-new(modal-fields) {
+	height: 100%;
 }
 
 .main .right {
@@ -63,6 +83,7 @@
 	height: auto;
 	max-height: 50vh;
 	animation: fade 0.2s;
+	-webkit-animation: fade 0.2s;
 }
 
 .stats {
@@ -508,6 +529,7 @@ hr.curve {
 		height: auto;
 		max-height: 50vh;
 		animation: fade 0.2s;
+		-webkit-animation: fade 0.2s;
 	}
 
 	.stats {

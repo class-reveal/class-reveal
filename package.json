@@ -13,7 +13,6 @@
     "@heroicons/react": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "use-view-transitions": "^1.0.16",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {

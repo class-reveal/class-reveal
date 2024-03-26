@@ -125,6 +125,7 @@ function App() {
 							{!signUpOpen && (
 								<button id="signup-button" onClick={() => handleExpand()}>
 									<span id="button-text">Sign up</span>
+									<div className="modal-fields"></div>
 								</button>
 							)}
 						</div>
