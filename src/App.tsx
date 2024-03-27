@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Modal from "./components/modal/Modal";
@@ -19,6 +19,7 @@ function App() {
 	const [isNotAtTop, setIsNotAtTop] = useState(false);
 	const [signUpOpen, setSignUpOpen] = useState(false);
 	const [collapsible, setCollapsible] = useState(false);
+	const professorCardsRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -108,7 +109,7 @@ function App() {
 				<Navbar collapsible={collapsible} onClick={() => handleCollapse()} />
 			)}
 			{signUpOpen && <Modal onClick={() => handleExpand()} />}
-			<div className="main">
+			<div id="home" className="main">
 				<div className="center">
 					<div className="left">
 						<div className="main-text">
@@ -275,6 +276,43 @@ function App() {
 							]
 						}}
 					/>
+					<CourseCard
+						course={{
+							name: "MATH102",
+							subject: "Mathematics",
+							color: "red",
+							credits: 4,
+							professor: "Professor 1",
+							rating: 5,
+							reviews: 10,
+							description: "This is a course description",
+							tags: [
+								"HARD",
+								"Homework-Heavy",
+								"Exam-Heavy",
+								"Lecture",
+								"Mandatory Attendance"
+							]
+						}}
+					/>
+					<CourseCard
+						course={{
+							name: "PHYS211",
+							subject: "Physics",
+							credits: 4,
+							professor: "Professor 1",
+							rating: 5,
+							color: "green",
+							reviews: 10,
+							description: "This is a course description",
+							tags: [
+								"Lecture/Lab/Recitation",
+								"Exam-Heavy",
+								"Homework-Heavy",
+								"Mandatory Attendance"
+							]
+						}}
+					/>
 				</div>
 			</div>
 			<div className="professors">
@@ -288,7 +326,7 @@ function App() {
 						course by course.
 					</p>
 				</div>
-				<div className="professor-cards">
+				<div ref={professorCardsRef} className="professor-cards">
 					<ProfessorCard
 						course={{
 							name: "Riley Meade",
@@ -333,11 +371,54 @@ function App() {
 							tags: ["HIST101", "HIST102", "Approachable", "Office Hours"]
 						}}
 					/>
+					<ProfessorCard
+						course={{
+							name: "Bob Dylan",
+							subject: "Mathematics Professor",
+							professor: "Professor 1",
+							rating: 5,
+							reviews: 10,
+							description: "This is a course description",
+							tags: ["MATH101", "MATH102", "Approachable", "Office Hours"]
+						}}
+					/>
+					<ProfessorCard
+						course={{
+							name: "Post Malone",
+							subject: "Economics Professor",
+							professor: "Professor 1",
+							rating: 5,
+							reviews: 10,
+							description: "This is a course description",
+							tags: ["ECON101", "ECON202", "Approachable", "Office Hours"]
+						}}
+					/>
+					<ProfessorCard
+						course={{
+							name: "Lebron James",
+							subject: "Physics Professor",
+							professor: "Professor 1",
+							rating: 5,
+							reviews: 10,
+							description: "This is a course description",
+							tags: ["PHYS211", "PHYS202", "Approachable", "Office Hours"]
+						}}
+					/>
+					<ProfessorCard
+						course={{
+							name: "Metro Boomin",
+							subject: "History Professor",
+							professor: "Professor 1",
+							rating: 5,
+							reviews: 10,
+							description: "This is a course description",
+							tags: ["HIST101", "HIST102", "Approachable", "Office Hours"]
+						}}
+					/>
 				</div>
 			</div>
 			<SplashWaveEnd className="splash-end" />
-			{/* <img src={splashWaveEnd} alt="" className="splash-end" /> */}
-			<div className="faq">
+			<div id="faq" className="faq">
 				<div className="faq-container">
 					<h3 className="text">Frequenty Asked Questions</h3>
 					<div className="cards">

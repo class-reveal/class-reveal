@@ -160,4 +160,7 @@
 	.scrolled {
 		background-color: #12273a;
 	}
+	.nav-title:hover {
+		color: #f4f4ff;
+	}
 }
