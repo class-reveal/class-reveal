@@ -1,8 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { flushSync } from "react-dom";
 import "./App.css";
+
+import { cards } from "./constants/constants";
+
 import Navbar from "./components/navbar/Navbar";
 import Modal from "./components/modal/Modal";
-import { flushSync } from "react-dom";
+import CourseCard from "./components/course-card/CourseCard";
+import ProfessorCard from "./components/professor-card/ProfessorCard";
 
 import BaseWave from "./assets/bg-waves/base-wave.svg?react";
 import PrimaryWave from "./assets/bg-waves/primary-wave.svg?react";
@@ -10,37 +15,10 @@ import SecondaryWave from "./assets/bg-waves/secondary-wave.svg?react";
 import TertiaryWave from "./assets/bg-waves/tertiary-wave.svg?react";
 import SplashWaveStart from "./assets/bg-waves/splash-wave-start.svg?react";
 import SplashWaveEnd from "./assets/bg-waves/splash-wave-end.svg?react";
-import BookAndGlass from "./assets/BookAndGlass.svg?react";
 import Star from "./assets/star.svg?react";
-import CourseCard from "./components/course-card/CourseCard";
-import ProfessorCard from "./components/professor-card/ProfessorCard";
 
-function App() {
-	const [isNotAtTop, setIsNotAtTop] = useState(false);
+export default function Home() {
 	const [signUpOpen, setSignUpOpen] = useState(false);
-	const [collapsible, setCollapsible] = useState(false);
-	const professorCardsRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsNotAtTop(window.scrollY > 0);
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-
-	useEffect(() => {
-		function updateSize() {
-			if (window.innerWidth > 800) {
-				setCollapsible(false);
-			}
-		}
-		window.addEventListener("resize", updateSize);
-		updateSize();
-		return () => window.removeEventListener("resize", updateSize);
-	}, []);
 
 	const handleExpand = () => {
 		if (!document.startViewTransition) {
@@ -54,94 +32,37 @@ function App() {
 		});
 	};
 
-	const handleCollapse = (value?: boolean) => {
-		value ? setCollapsible(value) : setCollapsible((prev) => !prev);
-	};
-
-	const cards = [
-		{
-			id: 1,
-			title: "What is ClassReveal?",
-			content:
-				"ClassReveal is a comprehensive platform designed to empower students by providing detailed reviews, ratings, and insights into courses, professors, and academic departments. It aims to enhance the decision-making process for course selection, ensuring a more informed and fulfilling academic experience."
-		},
-		{
-			id: 2,
-			title: "How can I submit a review?",
-			content:
-				"Once you're logged in to your school's page, navigate to the 'Submit a Review' section. Select your course and professor, and fill out the form with your insights and experiences, and hit submit. Your feedback is invaluable and helps the whole student community!"
-		},
-		{
-			id: 3,
-			title: "Can I review a course I took in a previous semester?",
-			content:
-				"Absolutely! We encourage reviews for courses taken at any time. The more data we collect, the more helpful the platform becomes for everyone."
-		},
-		{
-			id: 4,
-			title: "Are the reviews I post anonymous?",
-			content:
-				"Yes, all reviews submitted on ClassReveal are anonymous, and we only share your major and year at the time of the course. We respect your privacy and understand the importance of honest, uninfluenced feedback."
-		},
-		{
-			id: 5,
-			title: "How are the course and professor ratings calculated?",
-			content:
-				"Ratings are aggregated from all submitted student reviews. Each aspect, like course difficulty or professor effectiveness, is calculated based on the average score given by students who have taken the course or had the professor."
-		},
-		{
-			id: 6,
-			title: "What should I do if I encounter a technical issue?",
-			content:
-				"If you experience any technical problems, please contact our support team by emailing support@classreveal.com. Provide a detailed description of the issue, and we’ll work to resolve it as quickly as possible."
-		}
-	];
-
 	return (
 		<>
-			{isNotAtTop ? (
-				<Navbar
-					collapsible={collapsible}
-					onClick={() => handleCollapse()}
-					variant="scrolled"
-				/>
-			) : (
-				<Navbar collapsible={collapsible} onClick={() => handleCollapse()} />
-			)}
+			<Navbar
+				navLinks={[
+					{ title: "Penn\u00A0State", href: "/" },
+					{ title: "Rutgers", href: "/" }
+				]}
+			/>
 			{signUpOpen && <Modal onClick={() => handleExpand()} />}
 			<div id="home" className="main">
 				<div className="center">
-					<div className="left">
-						<div className="main-text">
-							<h2>Learn More About your Classes</h2>
-							<p>
-								Empower your academic journey with insights from real student
-								experiences. Share your own experiences and light the path for
-								your peers.
-							</p>
-							<h6>
-								Currently at Penn State and Rutgers. More schools coming soon.
-							</h6>
+					<div className="main-text">
+						<h2>Learn More About Your Classes</h2>
+						<p>
+							Empower your academic journey with insights from real student
+							experiences. Share your own experiences and light the path for
+							your peers.
+						</p>
 
-							{!signUpOpen && (
-								<button id="signup-button" onClick={() => handleExpand()}>
-									<span id="button-text">Sign up</span>
-									<div className="modal-fields"></div>
-								</button>
-							)}
-						</div>
-					</div>
-					<div className="right">
-						<div className="icon-container">
-							<BookAndGlass className="icon" />
-							{/* <img className="icon" alt="Logo" src="/BookAndGlass.svg" /> */}
-						</div>
+						{!signUpOpen && (
+							<button id="signup-button" onClick={() => handleExpand()}>
+								<span id="button-text">Explore Your School&apos;s Page</span>
+								<div className="modal-fields"></div>
+							</button>
+						)}
 					</div>
 				</div>
-				<PrimaryWave className="wav primary-wave" />
-				<SecondaryWave className="wav secondary-wave" />
-				<TertiaryWave className="wav tertiary-wave" />
-				<BaseWave className="base-wave" />
+				<PrimaryWave className="wav primary-wave" fill="#E6AF2E" />
+				<SecondaryWave className="wav secondary-wave" fill="#E6AF2E" />
+				<TertiaryWave className="wav tertiary-wave" fill="#E6AF2E" />
+				<BaseWave className="base-wave" fill="#f4f4ff" />
 			</div>
 			<div className="stats">
 				<div className="text left">
@@ -166,7 +87,7 @@ function App() {
 						across courses, professors, departments, and your entire school.
 						Compare courses and instructors side by side, identify strengths and
 						opportunities for improvement, and understand the educational
-						landscape you're navigating.{" "}
+						landscape you&apos;re navigating.
 					</p>
 				</div>
 			</div>
@@ -190,7 +111,6 @@ function App() {
 				</div>
 			</div>
 			<SplashWaveStart className="splash-start" />
-			{/* <img src={splashWaveStart} alt="" className="splash-start" /> */}
 			<div className="courses">
 				<div className="text courses-text">
 					<h3>Discover Courses</h3>
@@ -321,12 +241,12 @@ function App() {
 					<p>
 						Step into the academic inner circle with detailed professor reviews.
 						From teaching styles to grading fairness, discover what makes each
-						educator unique. With ClassReveal, you're not just choosing classes;
-						you're selecting the mentors who will shape your educational voyage,
-						course by course.
+						educator unique. With ClassReveal, you&apos;re not just choosing
+						classes; you&apos;re selecting the mentors who will shape your
+						educational voyage, course by course.
 					</p>
 				</div>
-				<div ref={professorCardsRef} className="professor-cards">
+				<div className="professor-cards">
 					<ProfessorCard
 						course={{
 							name: "Riley Meade",
@@ -424,14 +344,10 @@ function App() {
 					<div className="cards">
 						{cards.map((card) => (
 							<div className="card" key={card.id}>
-								<h4>{card.title}</h4>
+								<h5>{card.title}</h5>
 								<p>{card.content}</p>
 							</div>
 						))}
-					</div>
-					<div className="faq-bg">
-						<img src="/faq-left.svg" alt="" className="faq-left" />
-						<img src="/faq-right.svg" alt="" className="faq-right" />
 					</div>
 				</div>
 			</div>
@@ -447,5 +363,3 @@ function App() {
 		</>
 	);
 }
-
-export default App;

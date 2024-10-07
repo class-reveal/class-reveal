@@ -1,5 +1,6 @@
 import "./CourseCard.css";
 import star from "../../assets/star.svg";
+// import Image from "next/image";
 
 type CourseCardProps = {
 	course: {
@@ -26,7 +27,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
 						<h6>{rating}</h6>
 						<div className="rating-stars">
 							{Array.from({ length: rating }, (_, index) => (
-								<img key={index} src={star} height={20} alt="star" />
+								<img height={20} key={index} src={star} alt="star" />
 							))}
 						</div>
 					</div>

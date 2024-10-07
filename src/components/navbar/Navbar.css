@@ -1,166 +1,106 @@
+:root {
+	--div-gap: 10px;
+	--link-gap: 10px;
+	--nav-top: 20px;
+	--nav-padding: 16px 32px;
+	--nav-background: rgba(244, 244, 255, 0.75);
+	--nav-background-dark: rgba(13, 24, 33, 0.75);
+	--border-radius: 20px;
+	--link-color: 0, 0, 0;
+	--link-color-dark: 244, 244, 255;
+}
+
 .navbar {
-	position: fixed;
-	width: 100%;
-	z-index: 99;
-	transition: all 0.2s;
-}
-
-.nav {
-	width: 100%;
-	padding: 1em 0;
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	transition: all 0.3s ease-in-out;
-}
-
-.scrolled {
-	background-color: #f4f4f4;
-}
-
-.navbar-collapsible {
-	z-index: 99;
-	position: fixed;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100vh;
-	background-color: rgb(244, 244, 255, 0.5);
-	backdrop-filter: blur(20px);
-	transition: 0.1s;
-	animation: navAnimation 0.2s ease-in-out;
-	--webkit-animation: navAnimation 0.2s ease-in-out;
-}
-
-.expanded-nav {
-	position: fixed;
-	top: 0;
-	gap: 20px;
-	left: 50%;
-	transform: translate(-50%, 50%);
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	transition: all 0.2s;
-	view-transition-name: nav;
-}
-
-.nav-title:hover {
-	margin: 0;
-	font-size: 20px;
-	font-style: normal;
-	font-weight: 800;
-	line-height: normal;
-	color: black;
-	cursor: pointer;
-	transform: scale(1.05);
-	transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.beaker {
-	color: black;
-}
-
-.collapse {
-	display: flex;
-	cursor: pointer;
 	justify-content: center;
-	place-items: center;
+	align-items: center;
+	position: fixed;
+	top: var(--nav-top);
+	width: 100%;
+	z-index: 10;
 }
 
-.menu-icon {
-	width: 24px;
-}
-
-.nav-list {
-	display: none;
-	gap: 1em;
-}
-
-.nav-title {
-	margin: 0;
-	font-size: 20px;
-	font-style: normal;
-	font-weight: 800;
-	line-height: normal;
-	cursor: pointer;
-	transform: scale(1);
-	transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.nav .left {
+nav {
+	width: 80%;
+	padding: var(--nav-padding);
 	display: flex;
 	flex-direction: row;
 	align-items: baseline;
-	padding: 0 1em;
-}
+	gap: var(--div-gap);
+	border-radius: var(--border-radius);
+	background: transparent;
+	transition: 0.2s;
 
-.nav .right {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding: 0 1em;
-}
-
-@media screen and (min-width: 1050px) {
-	.nav {
-		top: 20px;
-		border-radius: 20px;
-		width: 90%;
-		padding: 1em 2em;
-		animation: navAnimation 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-		-webkit-animation: navAnimation 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+	& .logo {
+		&:hover {
+			scale: 1.05;
+			transition: 0.2s ease;
+		}
 	}
-	.navbar {
+
+	& .light-title {
+		color: rgba(var(--link-color-dark), 1);
+		&:hover {
+			scale: 1.05;
+			transition: 0.2s ease;
+		}
+	}
+
+	& .light-school {
+		color: rgba(var(--link-color-dark), 1);
+	}
+
+	& .links {
+		width: 100%;
 		display: flex;
-		top: 20px;
-		justify-content: center;
-	}
-	.navbar-collapsible {
-		background-color: transparent;
-		backdrop-filter: none;
-	}
-	.scrolled {
-		box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-	}
-	.nav-title {
-		font-size: 24px;
-	}
-	.nav-title:hover {
-		font-size: 24px;
-	}
-	.nav-list {
-		display: flex;
-		gap: 1em;
-	}
-	.nav .left {
-		padding: 0;
-		gap: 20px;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 
-	.nav .right {
-		padding: 0;
-		align-items: baseline;
+	& .link {
+		color: rgba(var(--link-color), 0.5);
+		padding: 0 var(--link-gap);
+		transition: 0.2s;
+
+		&:hover {
+			color: rgba(var(--link-color), 1);
+		}
 	}
-	.menu-icon {
-		display: none;
+
+	& .light {
+		color: rgba(var(--link-color-dark), 0.5);
+		&:hover {
+			color: rgba(var(--link-color-dark), 1);
+		}
 	}
 }
 
-@keyframes navAnimation {
-	0% {
-		opacity: 0%;
-	}
-	100% {
-		opacity: 100%;
-	}
+nav.filled {
+	background: var(--nav-background);
+	box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(10px);
+}
+
+nav.light {
+	background: var(--nav-background-dark);
+	box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(10px);
 }
 
 @media (prefers-color-scheme: dark) {
-	.scrolled {
-		background-color: #12273a;
+	nav {
+		& .link {
+			color: rgba(var(--link-color-dark), 0.5);
+
+			&:hover {
+				color: rgba(var(--link-color-dark), 1);
+			}
+		}
 	}
-	.nav-title:hover {
-		color: #f4f4ff;
+
+	nav.filled {
+		background: var(--nav-background-dark);
+		box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+		backdrop-filter: blur(10px);
 	}
 }

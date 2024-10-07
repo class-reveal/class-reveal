@@ -2,12 +2,22 @@
 	margin: 0;
 	padding: 0;
 	width: 100%;
+}
+
+html {
 	scroll-behavior: smooth;
+}
+
+.text {
+	--text-speed: 0.2;
+	animation: textAppear linear;
+	animation-timeline: view();
+	animation-range: 0% 25%;
 }
 
 .main {
 	width: 100%;
-	height: 100vh;
+	height: 100svh;
 	min-height: 600px;
 	display: flex;
 	justify-content: center;
@@ -16,53 +26,60 @@
 	background-position: bottom;
 	background-repeat: no-repeat;
 	background-size: 100% auto;
-}
 
-.text {
-	--text-speed: 0.2;
-	animation: textAppear linear;
-	animation-timeline: view();
-	/* animation-duration: 10s; */
-	animation-range: 0% 25%;
-}
-
-.main .left {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	align-items: start;
-	padding: 0 40px;
-	margin: 0 auto;
-	text-align: center;
-	animation: fade 0.2s linear;
-	-webkit-animation: fade 0.2s linear;
+	.left {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		align-items: start;
+		padding: 0 40px;
+		margin: 0 auto;
+		text-align: center;
+		animation: fade 0.2s linear;
+		-webkit-animation: fade 0.2s linear;
+	}
 }
 
 .main-text {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: start; */
+	text-align: center;
+	padding: 0 20px;
 	gap: 10px;
 	min-height: 189px;
 }
 
 #signup-button {
 	view-transition-name: modal;
-	overflow: clip;
 	contain: paint;
+	box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#signup-button:hover {
+	box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	transform: scale(1.05);
+}
+
+#signup-button:active {
+	box-shadow: none;
+	cursor: pointer;
+	transform: scale(0.95);
+}
+
+.modal-fields {
+	view-transition-name: modal-fields;
 }
 
 ::view-transition-old(modal),
 ::view-transition-new(modal) {
 	animation: none;
 	height: 100%;
-	overflow: clip;
+	-webkit-clip-path: content-box;
+	clip-path: content-box;
+	z-index: 100;
 	border-radius: 40px;
-}
-
-.modal-fields {
-	view-transition-name: modal-fields;
 }
 
 ::view-transition-old(modal-fields),
@@ -141,15 +158,13 @@ hr {
 	padding: 0;
 	animation: expand linear;
 	animation-timeline: view();
-	animation-range: 0% 25%;
+	animation-range: 0% 40%;
 }
 
 hr.curve {
 	width: 50%;
 	rotate: -45deg;
 	transform-origin: bottom;
-
-	/* translate: -50px -130px; */
 }
 
 .glance-text {
@@ -180,8 +195,6 @@ hr.curve {
 	justify-content: end;
 	align-items: end;
 	padding: 0 10%;
-
-	/* max-width: 700px; */
 }
 
 .splash-start,
@@ -191,22 +204,19 @@ hr.curve {
 	animation: midWave linear;
 	animation-timeline: view();
 	animation-range: entry;
+	fill: #7180ac;
+	line-height: 0;
 }
 
 .courses {
-	/* margin-top: -1px; */
-	/* width: 100vw; */
-	/* float: right; */
 	margin: 0;
 	padding: 40px 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* align-items: center; */
-	background-color: #e6af2e;
+	background-color: #7180ac;
 	gap: 40px;
 	overflow-x: clip;
-	/* height: 200px; */
 }
 
 .courses-text {
@@ -234,7 +244,7 @@ hr.curve {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #e6af2e;
+	background-color: #7180ac;
 	gap: 40px;
 	overflow-x: clip;
 }
@@ -256,6 +266,7 @@ hr.curve {
 	scroll-snap-type: x mandatory;
 	gap: 20px;
 	padding: 0 40px 40px 40px;
+	scrollbar-color: #f4f4ff transparent;
 }
 
 #button-text {
@@ -282,7 +293,6 @@ hr.curve {
 
 .faq-container {
 	padding-top: 40px;
-	/* padding: 40px 40px 40px 40px; */
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -295,11 +305,12 @@ hr.curve {
 	justify-content: center;
 	padding: 0 20px;
 }
+
 .card {
 	color: #000000;
-	padding: 60px 40px;
-	margin: 20px;
-	border-radius: 0 60px 60px 60px;
+	padding: 40px 30px;
+	margin: 15px;
+	border-radius: 0 40px 40px 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: start;
@@ -311,7 +322,6 @@ hr.curve {
 		#eaeaff 0%,
 		rgba(234, 234, 255, 0.5) 100%
 	);
-	box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(25px);
 	-webkit-backdrop-filter: blur(25px);
 	animation: textAppear linear;
@@ -386,8 +396,7 @@ hr.curve {
 		align-items: center;
 		width: 100%;
 		max-width: 100%;
-		min-height: 400px;
-		max-height: 800px;
+		height: 800px;
 		background: none;
 		display: grid;
 		grid-template-columns: 100%;
@@ -395,6 +404,18 @@ hr.curve {
 		z-index: 1;
 		grid-template-areas: "stack";
 		object-fit: cover;
+
+		.left {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			gap: 20px;
+			padding: 0;
+			justify-content: start;
+			align-items: start;
+			margin: 0;
+			text-align: left;
+		}
 	}
 
 	.wav {
@@ -446,7 +467,7 @@ hr.curve {
 		bottom: 0;
 		width: 100%;
 		height: auto;
-		/* object-fit: cover; */
+		line-height: 0;
 		margin-bottom: -1px;
 		--parallax-speed: 0;
 	}
@@ -459,21 +480,8 @@ hr.curve {
 		align-items: start;
 	}
 
-	.main .left {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-		gap: 20px;
-		padding: 0;
-		justify-content: start;
-		align-items: start;
-		max-width: 50vw;
-		margin: 0;
-		text-align: left;
-	}
-
 	.main-text {
-		align-items: start;
+		align-items: center;
 	}
 
 	.main .right {
@@ -519,10 +527,6 @@ hr.curve {
 		padding: 80px 0;
 		text-align: start;
 		gap: 80px;
-		/* background: url("/line-graph.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom; */
 	}
 
 	.unpack {
@@ -547,7 +551,6 @@ hr.curve {
 		animation-timeline: view();
 		animation-range: 0% 100%;
 		overflow-x: visible;
-		/* scrollbar-color: #12263a transparent; */
 	}
 
 	.course-cards:nth-child(1) {
@@ -625,12 +628,15 @@ hr.curve {
 		top: 300px;
 		right: 0;
 		max-width: 40%;
-		/* translate: 0 200px; */
 	}
 
 	.cards {
 		padding: 0 40px;
 		z-index: 5;
+	}
+	.card {
+		padding: 50px 40px;
+		border-radius: 0 60px 60px 60px;
 	}
 	.school {
 		padding: 80px 0;
@@ -654,12 +660,6 @@ hr.curve {
 	animation: midWave linear;
 	animation-timeline: view();
 	animation-range: entry;
-}
-
-@media screen and (min-width: 1520px) {
-	.main {
-		height: 100vh;
-	}
 }
 
 @keyframes fade {
@@ -746,24 +746,12 @@ hr.curve {
 	}
 }
 
-/* @keyframes wavAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(-500px);
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-} */
-
 @keyframes parallax {
 	from {
 		transform: translateY(0);
 	}
 	to {
-		transform: translateY(calc(var(--parallax-speed) * 300px));
+		transform: translateY(calc(var(--parallax-speed) * 500px));
 	}
 }
 
@@ -778,17 +766,21 @@ hr.curve {
 }
 
 @media (prefers-color-scheme: dark) {
-	.courses-text,
-	.professors-text,
 	.card {
-		h3 {
-			color: #000000;
-		}
-		h4 {
-			color: #000000;
-		}
-		p {
-			color: #000000;
-		}
+		background: linear-gradient(180deg, #12263a 0%, rgba(18, 38, 58, 0.5) 100%);
+	}
+
+	.courses,
+	.professors {
+		background-color: #12263a;
+	}
+
+	.splash-start,
+	.splash-end {
+		fill: #12263a;
+	}
+
+	.base-wave path {
+		fill: hsl(207, 43%, 4%);
 	}
 }

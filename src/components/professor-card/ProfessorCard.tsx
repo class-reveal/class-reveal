@@ -1,3 +1,5 @@
+"use client";
+
 import "./ProfessorCard.css";
 import star from "../../assets/star.svg";
 
